@@ -107,7 +107,7 @@ def cancel_membership(session):
     confirm = input("Are you sure you want to cancel this membership? (yes/no): ").strip().lower()
     
     if confirm == "yes":
-        member.membership_id = None  # Remove membership assignment
+        member.membership_id = None
         session.commit()
         print("✅ Membership has been canceled successfully!")
     else:
@@ -144,7 +144,6 @@ def view_expired_members(session):
 
 def generate_revenue_report(session):
     """Generate and display total revenue from memberships."""
-    # Get revenue breakdown by membership type
     revenue_data = (
         session.query(
             Membership.type,
@@ -188,7 +187,7 @@ def display_members_per_trainer(session):
     for trainer in trainers:
         print(f"\n🔹 Trainer: {trainer.name} | Specialty: {trainer.specialty}")
 
-        # Get members assigned to this trainer
+        
         assigned_members = (
             session.query(Member)
             .join(MemberTrainer, Member.id == MemberTrainer.member_id)
